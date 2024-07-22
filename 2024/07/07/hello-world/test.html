@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>网页示例</title>
+</head>
+<body>
+  <h1>网页示例</h1>
+
+  <script>
+    fetch('https://reservation.bupt.edu.cn/index.php/1600?l=zh-cn', {
+      method: 'GET',
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 NetType/WIFI MicroMessenger/7.0.20.1781(0x6700143B) WindowsWechat(0x63090b17) XWEB/9193 Flue',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+        'upgrade-insecure-requests': '1',
+        'sec-fetch-site': 'none',
+        'sec-fetch-mode': 'navigate',
+        'sec-fetch-dest': 'document',
+        'accept-language': 'zh-CN,zh;q=0.9',
+        'Cookie': 'think_language=zh-cn; PHPSESSID=0jovkefvgqlrh8pn006v3egdh2; GYW8n888ve0zO=601QWGQHyhtdpWHx8jzNOkO3JqfigiI3wcwDrrQxCE4de8aeSYRrhfBCdmbkzlJLzrkQjio3GF8wI15.l1jcUBbq'
+      }
+    })
+    .then(response => response.text())
+    .then(data => {
+      console.log(data); // 输出响应的内容
+    })
+    .catch(error => {
+      console.error('请求发生错误:', error);
+    });
+  </script>
+</body>
+</html>
