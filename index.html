@@ -13,14 +13,21 @@
       document.getElementById('responseContainer').innerText = response; // 将响应内容添加到指定的元素中
     }
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://reservation.bupt.edu.cn/index.php/1600?l=zh-cn', true);
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        handleResponse(xhr.responseText);
-      }
-    };
-    xhr.send();
+    function jsonpRequest(url, callback) {
+      var callbackName = 'jsonpCallback' + Date.now();
+      window[callbackName] = function(response) {
+        callback(response);
+        delete window[callbackName];
+        script.parentNode.removeChild(script);
+      };
+
+      var script = document.createElement('script');
+      script.src = url + '&callback=' + callbackName;
+      document.body.appendChild(script);
+    }
+
+    var url = 'https://reservation.bupt.edu.cn/index.php/1600?l=zh-cn';
+    jsonpRequest(url, handleResponse);
   </script>
 </body>
 </html>
