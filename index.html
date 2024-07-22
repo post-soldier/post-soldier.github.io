@@ -18,8 +18,7 @@
         'sec-fetch-site': 'none',
         'sec-fetch-mode': 'navigate',
         'sec-fetch-dest': 'document',
-        'accept-language': 'zh-CN,zh;q=0.9',
-        'Cookie': 'think_language=zh-cn; PHPSESSID=0jovkefvgqlrh8pn006v3egdh2; GYW8n888ve0zO=601QWGQHyhtdpWHx8jzNOkO3JqfigiI3wcwDrrQxCE4de8aeSYRrhfBCdmbkzlJLzrkQjio3GF8wI15.l1jcUBbq'
+        'accept-language': 'zh-CN,zh;q=0.9'
       }
     })
     .then(response => response.text())
@@ -28,6 +27,7 @@
     })
     .catch(error => {
       console.error('请求发生错误:', error);
+      document.getElementById('responseContainer').innerText = error;
     });
   </script>
 </body>
