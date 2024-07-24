@@ -1,44 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>网页示例</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proxy Request Demo</title>
+<style>
+    pre {
+        background: #f4f4f4;
+        padding: 10px;
+    }
+</style>
 </head>
 <body>
-  <h1>网页示例</h1>
-  <div id="responseContainer"></div>
+<h1>Proxy Request Demo</h1>
+<button onclick="makeProxyRequest()">Make Proxy Request</button>
+<hr>
+<h2>Response:</h2>
+<pre id="response"></pre>
+<hr>
+<h2>Response Headers:</h2>
+<pre id="responseHeaders"></pre>
 
-  <script>
-    fetch('https://reservation.bupt.edu.cn/index.php/1600?l=zh-cn', {
-      method: 'GET',
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 NetType/WIFI MicroMessenger/7.0.20.1781(0x6700143B) WindowsWechat(0x63090b17) XWEB/9193 Flue',
+<script>
+
+
+function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+function makeProxyRequest() {
+	// setCookie('PHPSESSID','sk0sqsls2sebfeqndst1jiq250',1);
+    const proxyUrl = 'https://cors.030801.xyz/http://reservation.bupt.edu.cn/index.php/1600?l=zh-cn';
+    const headers = {
+        'Upgrade-Insecure-Requests': '1',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 NetType/WIFI MicroMessenger/7.0.20.1781(0x6700143B) WindowsWechat(0x63090b13) XWEB/9185 Flue',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-        'upgrade-insecure-requests': '1',
-        'sec-fetch-site': 'none',
-        'sec-fetch-mode': 'navigate',
-        'sec-fetch-dest': 'document',
-        'accept-language': 'zh-CN,zh;q=0.9'
-      },
-      redirect: 'manual' // 禁止自动跟随重定向
-    })
-    .then(response => {
-      const headers = response.headers;
-      let headersText = '<h2>响应头信息:</h2><ul>';
-      for (const [key, value] of headers.entries()) {
-        headersText += `<li><strong>${key}</strong>: ${value}</li>`;
-      }
-      headersText += '</ul>';
-      document.getElementById('responseHeaders').innerHTML = headersText; // 将响应头信息显示在页面上
+        'Sec-Fetch-Site': 'none',
+        'Sec-Fetch-Mode': 'navigate',
+        'Sec-Fetch-Dest': 'document',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept-Language': 'zh-CN,zh;q=0.9',
+    };
 
-      return response.text();
+    fetch(proxyUrl, headers)
+    .then(response => {
+        document.getElementById('response').innerText = response.text();
+        const responseHeaders = response.headers;
+        let headersText = '';
+        for (const [key, value] of responseHeaders) {
+            headersText += `${key}: ${value}\n`;
+        }
+        document.getElementById('responseHeaders').innerText = headersText;
     })
-    .then(data => {
-      document.getElementById('responseContainer').innerHTML = data; // 将响应内容显示在页面上
-    })
-    .catch(error => {
-      document.getElementById('responseContainer').innerText = '请求发生错误: ' + error; // 显示错误信息在页面上
-    });
-  </script>
+    .catch(error => console.error(error));
+}
+</script>
 </body>
 </html>
