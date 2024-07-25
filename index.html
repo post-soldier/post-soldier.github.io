@@ -19,7 +19,7 @@
 <body>
 <h1>Proxy Request Demo</h1>
 <button onclick="loadInIframe()">Load in Iframe</button>
-<iframe id="demoIframe"></iframe>
+<iframe id="demoIframe" sandbox="allow-same-origin allow-scripts"></iframe>
 <hr>
 <h2>Response:</h2>
 <pre id="response"></pre>
@@ -65,9 +65,16 @@ function makeProxyRequest() {
     .catch(error => console.error(error));
 }
 
+
+
 function loadInIframe() {
     const iframe = document.getElementById('demoIframe');
-    iframe.src = 'https://cors.030801.xyz/redirect/?PHPSESSID=2qh41m0dgrbq49uajjdd4vqmd0'; // 替换为你想要加载的URL
+    const cookieData = 'PHPSESSID=2irf62qgekpdmk22tbk9jhg6v0; path=/; Secure';
+iframe.src = 'https://cors.030801.xyz/redirect/?PHPSESSID=2irf62qgekpdmk22tbk9jhg6v0';
+
+    iframe.onload = () => {
+        iframe.contentWindow.postMessage(cookieData, 'https://reservation.bupt.edu.cn/index.php/Wechat/Display/index'); // 替换为实际的iframe URL
+    };
 }
 </script>
 </body>
