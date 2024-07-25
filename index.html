@@ -70,7 +70,7 @@ function makeProxyRequest() {
 function loadInIframe() {
     const iframe = document.getElementById('demoIframe');
     const cookieData = 'PHPSESSID=2irf62qgekpdmk22tbk9jhg6v0; path=/; Secure';
-iframe.src = 'https://cors.030801.xyz/redirect/?PHPSESSID=2irf62qgekpdmk22tbk9jhg6v0';
+iframe.src = 'https://reservation.bupt.edu.cn/index.php/Wechat/Display/index';
 
     iframe.onload = () => {
         iframe.contentWindow.postMessage(cookieData, 'https://reservation.bupt.edu.cn/index.php/Wechat/Display/index'); // 替换为实际的iframe URL
