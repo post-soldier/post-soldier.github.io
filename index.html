@@ -73,11 +73,9 @@ function loadInIframe() {
     const iframe = document.getElementById('demoIframe');
 const phpsessid = document.getElementById('phpsessid').value;
     const cookieData = `PHPSESSID=${phpsessid}; path=/; Secure`;
-iframe.src = 'https://reservation.bupt.edu.cn/index.php/Wechat/Show/index/reserve_system_id/1593/target_page/index/user_id/0/third_party_type/0.html';
+iframe.src = `https://cors.030801.xyz/redirect/?PHPSESSID=${phpsessid}`;
 
-    iframe.onload = () => {
-        iframe.contentWindow.postMessage(cookieData, 'https://reservation.bupt.edu.cn/index.php/Wechat/Show/index/reserve_system_id/1593/target_page/index/user_id/0/third_party_type/0.html'); // 替换为实际的iframe URL
-    };
+
 }
 </script>
 </body>
