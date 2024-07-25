@@ -75,7 +75,9 @@ const phpsessid = document.getElementById('phpsessid').value;
     const cookieData = `PHPSESSID=${phpsessid}; path=/; Secure`;
 iframe.src = `https://cors.030801.xyz/redirect/?PHPSESSID=${phpsessid}`;
 
-
+    iframe.onload = () => {
+        iframe.contentWindow.postMessage(cookieData, `https://cors.030801.xyz/redirect/?PHPSESSID=${phpsessid}`); // 替换为实际的iframe URL
+    };
 }
 </script>
 </body>
