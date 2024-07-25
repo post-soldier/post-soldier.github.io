@@ -18,6 +18,8 @@
 </head>
 <body>
 <h1>Proxy Request Demo</h1>
+<label for="phpsessid">PHPSESSID:</label>
+<input id="phpsessid" type="text" placeholder="Enter PHPSESSID here">
 <button onclick="loadInIframe()">Load in Iframe</button>
 <iframe id="demoIframe" sandbox="allow-same-origin allow-scripts"></iframe>
 <hr>
@@ -69,11 +71,12 @@ function makeProxyRequest() {
 
 function loadInIframe() {
     const iframe = document.getElementById('demoIframe');
-    const cookieData = 'PHPSESSID=2irf62qgekpdmk22tbk9jhg6v0; path=/; Secure';
-iframe.src = 'https://cors.030801.xyz/https://reservation.bupt.edu.cn/index.php/Wechat/Display/index';
+const phpsessid = document.getElementById('phpsessid').value;
+    const cookieData = `PHPSESSID=${phpsessid}; path=/; Secure`;
+iframe.src = 'https://reservation.bupt.edu.cn/index.php/Wechat/Show/index/reserve_system_id/1593/target_page/index/user_id/0/third_party_type/0.html';
 
     iframe.onload = () => {
-        iframe.contentWindow.postMessage(cookieData, 'https://cors.030801.xyz/https://reservation.bupt.edu.cn/index.php/Wechat/Display/index'); // 替换为实际的iframe URL
+        iframe.contentWindow.postMessage(cookieData, 'https://reservation.bupt.edu.cn/index.php/Wechat/Show/index/reserve_system_id/1593/target_page/index/user_id/0/third_party_type/0.html'); // 替换为实际的iframe URL
     };
 }
 </script>
