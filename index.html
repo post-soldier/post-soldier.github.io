@@ -73,11 +73,8 @@ function loadInIframe() {
     const iframe = document.getElementById('demoIframe');
 const phpsessid = document.getElementById('phpsessid').value;
     const cookieData = `PHPSESSID=${phpsessid}; path=/; Secure`;
-iframe.src = `https://cors.030801.xyz/redirect/?PHPSESSID=${phpsessid}`;
+iframe.src = `https://cors.030801.xyz/https://reservation.bupt.edu.cn/index.php/1600?l=zh-cn`;
 
-    iframe.onload = () => {
-        iframe.contentWindow.postMessage(cookieData, `https://cors.030801.xyz/redirect/?PHPSESSID=${phpsessid}`); // 替换为实际的iframe URL
-    };
 }
 </script>
 </body>
